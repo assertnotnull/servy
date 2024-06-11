@@ -1,0 +1,13 @@
+defmodule Servy.Filehandler do
+  def handle_file({:ok, content}, conv) do
+    %{conv | status: 200, resp_body: content}
+  end
+
+  def handle_file({:error, :enoent}, conv) do
+    %{conv | status: 200, resp_body: "File Not Found"}
+  end
+
+  def handle_file({:error, reason}, conv) do
+    %{conv | status: 200, resp_body: "File Error: #{reason}"}
+  end
+end
